@@ -6,6 +6,23 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
+  hooks: {
+    beforeDelete: [
+      async ({ req, id }) => {
+        await req.payload.update({
+          collection: 'posts',
+          where: {
+            author: {
+              equals: id,
+            },
+          },
+          data: {
+            author: null,
+          },
+        })
+      },
+    ],
+  },
   fields: [
     // Email added by default
     {
