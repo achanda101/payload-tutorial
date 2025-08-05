@@ -8,6 +8,30 @@ export const Users: CollectionConfig = {
   auth: true,
   fields: [
     // Email added by default
-    // Add more fields as needed
+    {
+      name: 'role',
+      type: 'select',
+      options: [
+        {
+          label: 'Admin',
+          value: 'admin',
+        },
+        {
+          label: 'Editor',
+          value: 'editor',
+        },
+        { label: 'Writer', value: 'writer' },
+      ],
+      admin: {
+        placeholder: 'Select a role',
+      },
+      required: true,
+    },
+    {
+      name: 'posts',
+      type: 'join',
+      collection: 'posts',
+      on: 'author',
+    },
   ],
 }

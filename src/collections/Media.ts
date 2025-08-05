@@ -11,6 +11,28 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'caption',
+      type: 'text',
+      required: false,
+    },
   ],
-  upload: true,
+  upload: {
+    adminThumbnail: 'small',
+    imageSizes: [
+      {
+        name: 'small',
+        fit: 'cover',
+        height: 300,
+        width: 900,
+      },
+      {
+        name: 'large',
+        fit: 'cover',
+        height: 600,
+        width: 1800,
+      },
+    ],
+    mimeTypes: ['image/*'],
+  },
 }
