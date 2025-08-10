@@ -20,6 +20,10 @@ export const BlogPosts: CollectionConfig = {
     group: 'Content',
   },
   defaultSort: ['updatedAt', 'title'],
+  defaultPopulate: {
+    author: true,
+    featuredImage: true,
+  },
   fields: [
     {
       name: 'title',
