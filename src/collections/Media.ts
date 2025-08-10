@@ -19,20 +19,21 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     adminThumbnail: 'small',
+    formatOptions: {
+      format: 'webp',
+    },
+    staticURL: '/media',
     imageSizes: [
       {
         name: 'small',
+        width: 50,
+        height: 50,
         fit: 'cover',
-        height: 300,
-        width: 900,
-      },
-      {
-        name: 'large',
-        fit: 'cover',
-        height: 600,
-        width: 1800,
+        formatOptions: {
+          format: 'webp',
+        },
       },
     ],
-    mimeTypes: ['image/*'],
+    mimeTypes: ['image/*', 'application/pdf'],
   },
 }

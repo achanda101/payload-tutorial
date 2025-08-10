@@ -129,6 +129,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  name: string;
   role: 'admin' | 'editor' | 'writer';
   posts?: {
     docs?: (number | Post)[];
@@ -160,6 +161,11 @@ export interface User {
 export interface Post {
   id: number;
   title: string;
+  /**
+   * Must be unique and can be used in the URL. If left blank, it will be auto-generated from the title.
+   */
+  slug: string;
+  excerpt?: string | null;
   content?: {
     root: {
       type: string;
@@ -175,19 +181,20 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  content_html?: string | null;
   selectPostType: ('article' | 'report' | 'audioPodcast')[];
-  date?: string | null;
-  author?: (number | null) | User;
+  author: number | User;
   upload?: (number | null) | Media;
   Seo?: {
     seoTitle?: string | null;
     seoDescription?: string | null;
   };
-  media: {
-    featuredImage: number | Media;
+  media?: {
+    featuredImage?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   _status?: ('draft' | 'published') | null;
 }
 /**
@@ -211,14 +218,6 @@ export interface Media {
   focalY?: number | null;
   sizes?: {
     small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -294,6 +293,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   role?: T;
   posts?: T;
   updatedAt?: T;
@@ -344,16 +344,6 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        large?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
       };
 }
 /**
@@ -362,9 +352,11 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
+  excerpt?: T;
   content?: T;
+  content_html?: T;
   selectPostType?: T;
-  date?: T;
   author?: T;
   upload?: T;
   Seo?:
@@ -380,6 +372,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   _status?: T;
 }
 /**

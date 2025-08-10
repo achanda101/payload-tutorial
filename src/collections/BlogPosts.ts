@@ -1,6 +1,12 @@
 import type { CollectionConfig } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { fa } from 'payload/i18n/fa'
+import { lexicalEditor, lexicalHTML, HTMLConverterFeature } from '@payloadcms/richtext-lexical'
+import { except } from '@payloadcms/db-postgres/drizzle/pg-core'
+
+const formatSlug = (val: string): string =>
+  val
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '')
+    .toLowerCase()
 
 export const BlogPosts: CollectionConfig = {
   slug: 'posts',
@@ -10,8 +16,10 @@ export const BlogPosts: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'date', 'author'],
+    defaultColumns: ['title', 'updatedAt', 'author'],
+    group: 'Content',
   },
+  defaultSort: ['updatedAt', 'title'],
   fields: [
     {
       name: 'title',
@@ -22,10 +30,45 @@ export const BlogPosts: CollectionConfig = {
       },
     },
     {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      required: true,
+      admin: {
+        description:
+          'Must be unique and can be used in the URL. If left blank, it will be auto-generated from the title.',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, operation, data }) => {
+            if (operation === 'create' || !value) {
+              return formatSlug(data?.title || value || '')
+            }
+            return value
+          },
+        ],
+      },
+    },
+    {
+      name: 'excerpt',
+      type: 'textarea',
+      admin: {
+        placeholder: 'A brief summary of the post',
+      },
+    },
+    {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor(),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures.filter(
+            (feature) => !['inlineCode', 'subscript', 'indent', 'checklist'].includes(feature.key),
+          ),
+          HTMLConverterFeature(),
+        ],
+      }),
     },
+    lexicalHTML('content', { name: 'content_html' }),
     {
       type: 'collapsible',
       label: 'Post Details',
@@ -50,7 +93,6 @@ export const BlogPosts: CollectionConfig = {
                   value: 'audioPodcast',
                 },
               ],
-              defaultValue: 'article',
               hasMany: true,
               required: true,
               admin: {
@@ -59,33 +101,24 @@ export const BlogPosts: CollectionConfig = {
               },
             },
             {
-              name: 'date',
-              type: 'date',
+              name: 'author',
+              type: 'relationship',
+              relationTo: 'users',
+              required: true,
               admin: {
-                date: {
-                  pickerAppearance: 'dayAndTime',
-                  timeIntervals: 15,
-                },
+                allowEdit: false,
                 width: '50%',
+                placeholder: 'Select the author of the post',
+              },
+              filterOptions: ({ relationTo }) => {
+                if (relationTo === 'users') {
+                  return {
+                    role: { not_equals: 'admin' },
+                  }
+                }
               },
             },
           ],
-        },
-        {
-          name: 'author',
-          type: 'relationship',
-          relationTo: 'users',
-          admin: {
-            allowEdit: false,
-          },
-          filterOptions: ({ id, data, siblingData, relationTo }) => {
-            if (relationTo === 'users') {
-              return {
-                role: { not_equals: 'admin' },
-              }
-            }
-            return {}
-          },
         },
       ],
       admin: {
@@ -126,7 +159,6 @@ export const BlogPosts: CollectionConfig = {
               name: 'featuredImage',
               type: 'upload',
               relationTo: 'media',
-              required: true,
             },
           ],
         },
@@ -134,6 +166,7 @@ export const BlogPosts: CollectionConfig = {
     },
   ],
   timestamps: true,
+  trash: true,
   versions: {
     drafts: true,
   },
