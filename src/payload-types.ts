@@ -415,10 +415,15 @@ export interface Nav {
   id: number;
   MenuItems?:
     | {
+        linkType: 'internal' | 'external';
         /**
-         * URL for the navigation item. Use absolute URLs or relative paths.
+         * Select a blog post to link to
          */
-        link: string;
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
         label: string;
         id?: string | null;
       }[]
@@ -434,7 +439,9 @@ export interface NavSelect<T extends boolean = true> {
   MenuItems?:
     | T
     | {
-        link?: T;
+        linkType?: T;
+        blogPost?: T;
+        externalUrl?: T;
         label?: T;
         id?: T;
       };

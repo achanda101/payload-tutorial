@@ -44,12 +44,49 @@ export default buildConfig({
           type: 'array',
           fields: [
             {
-              name: 'link',
-              type: 'text',
-              admin: {
-                description: 'URL for the navigation item. Use absolute URLs or relative paths.',
-              },
+              name: 'linkType',
+              type: 'radio',
+              options: [
+                {
+                  label: 'Blog Post',
+                  value: 'internal',
+                },
+                {
+                  label: 'External URL',
+                  value: 'external',
+                },
+              ],
+              defaultValue: 'internal',
               required: true,
+            },
+            {
+              name: 'blogPost',
+              type: 'relationship',
+              relationTo: 'posts',
+              required: true,
+              admin: {
+                condition: (data, siblingData) => siblingData?.linkType === 'internal',
+                description: 'Select a blog post to link to',
+              },
+            },
+            {
+              name: 'externalUrl',
+              type: 'text',
+              required: true,
+              admin: {
+                condition: (data, siblingData) => siblingData?.linkType === 'external',
+                description: 'Enter the external URL (https://example.com)',
+              },
+              validate: (val, { siblingData }) => {
+                if (siblingData?.linkType === 'external') {
+                  if (!val) return 'External URL is required'
+                  const isValidUrl = /^https?:\/\/.+/.test(val)
+                  if (!isValidUrl) {
+                    return 'Please enter a valid URL starting with http:// or https://'
+                  }
+                }
+                return true
+              },
             },
             {
               name: 'label',

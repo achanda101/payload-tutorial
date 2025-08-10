@@ -23,6 +23,7 @@ export const BlogPosts: CollectionConfig = {
   defaultPopulate: {
     author: true,
     featuredImage: true,
+    slug: true,
   },
   fields: [
     {
