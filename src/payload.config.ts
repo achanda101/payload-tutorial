@@ -11,6 +11,8 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { BlogPosts } from './collections/BlogPosts'
+import { Navigation } from './globals/Navigation'
+import { Header } from './globals/Header'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,71 +35,7 @@ export default buildConfig({
     abortOnLimit: true,
     responseOnLimit: 'File size exceeds the limit of 20 MB.',
   },
-  globals: [
-    {
-      slug: 'nav',
-      label: 'Navigation',
-      fields: [
-        {
-          name: 'MenuItems',
-          label: 'Navigation Items',
-          type: 'array',
-          fields: [
-            {
-              name: 'linkType',
-              type: 'radio',
-              options: [
-                {
-                  label: 'Blog Post',
-                  value: 'internal',
-                },
-                {
-                  label: 'External URL',
-                  value: 'external',
-                },
-              ],
-              defaultValue: 'internal',
-              required: true,
-            },
-            {
-              name: 'blogPost',
-              type: 'relationship',
-              relationTo: 'posts',
-              required: true,
-              admin: {
-                condition: (data, siblingData) => siblingData?.linkType === 'internal',
-                description: 'Select a blog post to link to',
-              },
-            },
-            {
-              name: 'externalUrl',
-              type: 'text',
-              required: true,
-              admin: {
-                condition: (data, siblingData) => siblingData?.linkType === 'external',
-                description: 'Enter the external URL (https://example.com)',
-              },
-              validate: (val, { siblingData }) => {
-                if (siblingData?.linkType === 'external') {
-                  if (!val) return 'External URL is required'
-                  const isValidUrl = /^https?:\/\/.+/.test(val)
-                  if (!isValidUrl) {
-                    return 'Please enter a valid URL starting with http:// or https://'
-                  }
-                }
-                return true
-              },
-            },
-            {
-              name: 'label',
-              type: 'text',
-              required: true,
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  globals: [Navigation, Header],
   collections: [Users, Media, BlogPosts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

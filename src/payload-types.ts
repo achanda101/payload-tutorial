@@ -92,9 +92,11 @@ export interface Config {
   };
   globals: {
     nav: Nav;
+    header: Header;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: null;
   user: User & {
@@ -413,18 +415,24 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Nav {
   id: number;
-  MenuItems?:
+  TopLevelMenuItems?:
     | {
-        linkType: 'internal' | 'external';
-        /**
-         * Select a blog post to link to
-         */
-        blogPost?: (number | null) | Post;
-        /**
-         * Enter the external URL (https://example.com)
-         */
-        externalUrl?: string | null;
         label: string;
+        MenuItems?:
+          | {
+              linkType: 'internal' | 'external';
+              /**
+               * Select a blog post to link to
+               */
+              blogPost?: (number | null) | Post;
+              /**
+               * Enter the external URL (https://example.com)
+               */
+              externalUrl?: string | null;
+              label: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -433,18 +441,54 @@ export interface Nav {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  /**
+   * Upload the logo for the header
+   */
+  logo: number | Media;
+  /**
+   * Enable or disable the search functionality in the header
+   */
+  searchEnabled?: boolean | null;
+  languages: ('en' | 'th' | 'hn')[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
-  MenuItems?:
+  TopLevelMenuItems?:
     | T
     | {
-        linkType?: T;
-        blogPost?: T;
-        externalUrl?: T;
         label?: T;
+        MenuItems?:
+          | T
+          | {
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              label?: T;
+              id?: T;
+            };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  searchEnabled?: T;
+  languages?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
