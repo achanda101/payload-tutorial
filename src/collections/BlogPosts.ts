@@ -19,6 +19,12 @@ export const BlogPosts: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'updatedAt', 'author'],
     group: 'Content',
+    livePreview: {
+      url: ({ data }) => {
+        const baseURL = process.env.NEXT_PUBLIC_DOMAIN_URL || 'http://localhost:3000'
+        return `${baseURL}/${data.slug}`
+      },
+    },
   },
   defaultSort: ['updatedAt', 'title'],
   defaultPopulate: {
