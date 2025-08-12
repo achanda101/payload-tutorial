@@ -6,6 +6,7 @@ export const ContentWithMedia: Block = {
     singular: 'Content with Media',
     plural: 'Content with Media Blocks',
   },
+  imageURL: '/icons/content-with-media-icon.png',
   fields: [
     {
       name: 'image',

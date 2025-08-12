@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { lexicalEditor, lexicalHTML, HTMLConverterFeature } from '@payloadcms/richtext-lexical'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia'
+import { fa } from 'payload/i18n/fa'
 
 const formatSlug = (val: string): string =>
   val
@@ -70,6 +71,10 @@ export const BlogPosts: CollectionConfig = {
         plural: 'Stories of Resilience',
       },
       maxRows: 1,
+      admin: {
+        initCollapsed: true,
+        isSortable: false,
+      },
     },
     {
       type: 'blocks',
@@ -80,6 +85,10 @@ export const BlogPosts: CollectionConfig = {
         plural: 'Featured Publications',
       },
       maxRows: 1,
+      admin: {
+        initCollapsed: true,
+        isSortable: false,
+      },
     },
     {
       type: 'blocks',
@@ -90,6 +99,9 @@ export const BlogPosts: CollectionConfig = {
         plural: 'Publications',
       },
       maxRows: 3,
+      admin: {
+        initCollapsed: true,
+      },
     },
     {
       name: 'content',
