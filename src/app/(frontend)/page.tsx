@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 
 import config from '@/payload.config'
-import Navigation from './components/Navigation'
+import Navigation from './_components/Navigation'
 import './styles.css'
 
 export default async function HomePage() {
