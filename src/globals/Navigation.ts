@@ -3,6 +3,9 @@ import type { GlobalConfig } from 'payload'
 export const Navigation: GlobalConfig = {
   slug: 'nav',
   label: 'Navigation',
+  admin: {
+    group: 'Site Settings',
+  },
   fields: [
     {
       name: 'TopLevelMenuItems',

@@ -168,6 +168,198 @@ export interface Post {
    */
   slug: string;
   excerpt?: string | null;
+  storiesOfResilience?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        contentTitle?: {
+          /**
+           * Title of the content block
+           */
+          title?: string | null;
+        };
+        contentTags?: {
+          tags?:
+            | {
+                tag?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        contentBody?: {
+          /**
+           * Enter the main content for the block
+           */
+          content?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        contentLink?: {
+          linkType?: ('internal' | 'external') | null;
+          /**
+           * Select a blog post to link to
+           */
+          blogPost?: (number | null) | Post;
+          /**
+           * Enter the external URL (https://example.com)
+           */
+          externalUrl?: string | null;
+          linkLabel?: string | null;
+        };
+        contentIcon?: {
+          /**
+           * Upload an icon image for the content block
+           */
+          icon?: (number | null) | Media;
+        };
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content-w-media';
+      }[]
+    | null;
+  featuredPublication?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        contentTitle?: {
+          /**
+           * Title of the content block
+           */
+          title?: string | null;
+        };
+        contentTags?: {
+          tags?:
+            | {
+                tag?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        contentBody?: {
+          /**
+           * Enter the main content for the block
+           */
+          content?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        contentLink?: {
+          linkType?: ('internal' | 'external') | null;
+          /**
+           * Select a blog post to link to
+           */
+          blogPost?: (number | null) | Post;
+          /**
+           * Enter the external URL (https://example.com)
+           */
+          externalUrl?: string | null;
+          linkLabel?: string | null;
+        };
+        contentIcon?: {
+          /**
+           * Upload an icon image for the content block
+           */
+          icon?: (number | null) | Media;
+        };
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content-w-media';
+      }[]
+    | null;
+  listOfPublications?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        contentTitle?: {
+          /**
+           * Title of the content block
+           */
+          title?: string | null;
+        };
+        contentTags?: {
+          tags?:
+            | {
+                tag?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        contentBody?: {
+          /**
+           * Enter the main content for the block
+           */
+          content?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        contentLink?: {
+          linkType?: ('internal' | 'external') | null;
+          /**
+           * Select a blog post to link to
+           */
+          blogPost?: (number | null) | Post;
+          /**
+           * Enter the external URL (https://example.com)
+           */
+          externalUrl?: string | null;
+          linkLabel?: string | null;
+        };
+        contentIcon?: {
+          /**
+           * Upload an icon image for the content block
+           */
+          icon?: (number | null) | Media;
+        };
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content-w-media';
+      }[]
+    | null;
   content?: {
     root: {
       type: string;
@@ -356,6 +548,141 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   excerpt?: T;
+  storiesOfResilience?:
+    | T
+    | {
+        'content-w-media'?:
+          | T
+          | {
+              image?: T;
+              contentTitle?:
+                | T
+                | {
+                    title?: T;
+                  };
+              contentTags?:
+                | T
+                | {
+                    tags?:
+                      | T
+                      | {
+                          tag?: T;
+                          id?: T;
+                        };
+                  };
+              contentBody?:
+                | T
+                | {
+                    content?: T;
+                  };
+              contentLink?:
+                | T
+                | {
+                    linkType?: T;
+                    blogPost?: T;
+                    externalUrl?: T;
+                    linkLabel?: T;
+                  };
+              contentIcon?:
+                | T
+                | {
+                    icon?: T;
+                  };
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  featuredPublication?:
+    | T
+    | {
+        'content-w-media'?:
+          | T
+          | {
+              image?: T;
+              contentTitle?:
+                | T
+                | {
+                    title?: T;
+                  };
+              contentTags?:
+                | T
+                | {
+                    tags?:
+                      | T
+                      | {
+                          tag?: T;
+                          id?: T;
+                        };
+                  };
+              contentBody?:
+                | T
+                | {
+                    content?: T;
+                  };
+              contentLink?:
+                | T
+                | {
+                    linkType?: T;
+                    blogPost?: T;
+                    externalUrl?: T;
+                    linkLabel?: T;
+                  };
+              contentIcon?:
+                | T
+                | {
+                    icon?: T;
+                  };
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  listOfPublications?:
+    | T
+    | {
+        'content-w-media'?:
+          | T
+          | {
+              image?: T;
+              contentTitle?:
+                | T
+                | {
+                    title?: T;
+                  };
+              contentTags?:
+                | T
+                | {
+                    tags?:
+                      | T
+                      | {
+                          tag?: T;
+                          id?: T;
+                        };
+                  };
+              contentBody?:
+                | T
+                | {
+                    content?: T;
+                  };
+              contentLink?:
+                | T
+                | {
+                    linkType?: T;
+                    blogPost?: T;
+                    externalUrl?: T;
+                    linkLabel?: T;
+                  };
+              contentIcon?:
+                | T
+                | {
+                    icon?: T;
+                  };
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   content?: T;
   content_html?: T;
   selectPostType?: T;

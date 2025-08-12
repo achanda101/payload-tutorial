@@ -3,6 +3,9 @@ import type { GlobalConfig } from 'payload'
 export const Header: GlobalConfig = {
   slug: 'header',
   label: 'Header',
+  admin: {
+    group: 'Site Settings',
+  },
   fields: [
     {
       name: 'logo',

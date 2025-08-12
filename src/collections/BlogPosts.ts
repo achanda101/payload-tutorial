@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { lexicalEditor, lexicalHTML, HTMLConverterFeature } from '@payloadcms/richtext-lexical'
-import { except } from '@payloadcms/db-postgres/drizzle/pg-core'
+import { ContentWithMedia } from '@/blocks/ContentWithMedia'
 
 const formatSlug = (val: string): string =>
   val
@@ -60,6 +60,36 @@ export const BlogPosts: CollectionConfig = {
       admin: {
         placeholder: 'A brief summary of the post',
       },
+    },
+    {
+      type: 'blocks',
+      name: 'storiesOfResilience',
+      blocks: [ContentWithMedia],
+      labels: {
+        singular: 'A Story of Resilience',
+        plural: 'Stories of Resilience',
+      },
+      maxRows: 1,
+    },
+    {
+      type: 'blocks',
+      name: 'featuredPublication',
+      blocks: [ContentWithMedia],
+      labels: {
+        singular: 'A Featured Publication',
+        plural: 'Featured Publications',
+      },
+      maxRows: 1,
+    },
+    {
+      type: 'blocks',
+      name: 'listOfPublications',
+      blocks: [ContentWithMedia],
+      labels: {
+        singular: 'A Publication',
+        plural: 'Publications',
+      },
+      maxRows: 3,
     },
     {
       name: 'content',
