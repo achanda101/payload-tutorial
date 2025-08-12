@@ -1,7 +1,8 @@
 import { Block } from 'payload'
+import { lexicalEditor, HTMLConverterFeature, lexicalHTML } from '@payloadcms/richtext-lexical'
 
-export const ContentWithMedia: Block = {
-  slug: 'content-w-media',
+export const MediaCard: Block = {
+  slug: 'mediaCard',
   labels: {
     singular: 'Content with Media',
     plural: 'Content with Media Blocks',
@@ -20,7 +21,7 @@ export const ContentWithMedia: Block = {
       type: 'tabs',
       tabs: [
         {
-          name: 'contentTitle',
+          label: 'Content Title',
           fields: [
             {
               name: 'title',
@@ -32,7 +33,7 @@ export const ContentWithMedia: Block = {
           ],
         },
         {
-          name: 'contentTags',
+          label: 'Content Tags',
           fields: [
             {
               name: 'tags',
@@ -50,19 +51,23 @@ export const ContentWithMedia: Block = {
           ],
         },
         {
-          name: 'contentBody',
+          label: 'Content Body',
           fields: [
             {
               name: 'content',
               type: 'richText',
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+              }),
               admin: {
                 description: 'Enter the main content for the block',
               },
             },
+            lexicalHTML('content', { name: 'content_html' }),
           ],
         },
         {
-          name: 'contentLink',
+          label: 'Content Link',
           fields: [
             {
               name: 'linkType',
@@ -113,7 +118,7 @@ export const ContentWithMedia: Block = {
           ],
         },
         {
-          name: 'contentIcon',
+          label: 'Content Icon',
           fields: [
             {
               name: 'icon',

@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { lexicalEditor, lexicalHTML, HTMLConverterFeature } from '@payloadcms/richtext-lexical'
-import { ContentWithMedia } from '@/blocks/ContentWithMedia'
+import { MediaCard } from '@/blocks/MediaCard'
 import { fa } from 'payload/i18n/fa'
 
 const formatSlug = (val: string): string =>
@@ -65,7 +65,7 @@ export const BlogPosts: CollectionConfig = {
     {
       type: 'blocks',
       name: 'storiesOfResilience',
-      blocks: [ContentWithMedia],
+      blocks: [MediaCard],
       labels: {
         singular: 'A Story of Resilience',
         plural: 'Stories of Resilience',
@@ -79,7 +79,7 @@ export const BlogPosts: CollectionConfig = {
     {
       type: 'blocks',
       name: 'featuredPublication',
-      blocks: [ContentWithMedia],
+      blocks: [MediaCard],
       labels: {
         singular: 'A Featured Publication',
         plural: 'Featured Publications',
@@ -93,7 +93,7 @@ export const BlogPosts: CollectionConfig = {
     {
       type: 'blocks',
       name: 'listOfPublications',
-      blocks: [ContentWithMedia],
+      blocks: [MediaCard],
       labels: {
         singular: 'A Publication',
         plural: 'Publications',

@@ -3,8 +3,10 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import React from 'react'
 import { fileURLToPath } from 'url'
+import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 
 import config from '@/payload.config'
+import Navigation from './components/Navigation'
 import './styles.css'
 
 export default async function HomePage() {
@@ -13,47 +15,52 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  // Fetch homepage data
+  const homepage = await payload.findGlobal({
+    slug: 'homepage',
+    draft: true,
+  })
+  // console.log(JSON.stringify(homepage, null, 2))
 
-  return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
+  const navMenu = await payload.findGlobal({
+    slug: 'nav',
+    draft: true,
+    depth: 2,
+  })
+  // Function to extract menu structure
+  function extractMenuStructure(navData: any) {
+    if (!navData?.TopLevelMenuItems) return []
+
+    return navData.TopLevelMenuItems.map((topLevel: any) => ({
+      label: topLevel.label,
+      subMenuItems:
+        topLevel.MenuItems?.map((subItem: any) => ({
+          label: subItem.label,
+          slug: subItem.linkType === 'external' ? subItem.externalUrl : subItem.blogPost.slug,
+        })) || [],
+    }))
+  }
+
+  const menuStructure = extractMenuStructure(navMenu)
+  // console.log(JSON.stringify(menuStructure, null, 2))
+
+  if (!homepage) {
+    return (
+      <div className="home">
+        <h1>Homepage not found</h1>
+        <p>Please create a homepage in the admin panel.</p>
+      </div>
+    )
+  } else {
+    return (
+      <>
+        <RefreshRouteOnSave />
+        <div className="home">
+          <Navigation menuItems={menuStructure} />
+          {homepage.heroTitle && <h1>{homepage.heroTitle}</h1>}
+          {homepage.heroSubtitle && <p>{homepage.heroSubtitle}</p>}
         </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
-  )
+      </>
+    )
+  }
 }

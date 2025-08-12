@@ -11,6 +11,9 @@ importers:
       '@payloadcms/db-postgres':
         specifier: 3.49.1
         version: 3.49.1(payload@3.49.1(graphql@16.11.0)(typescript@5.7.3))
+      '@payloadcms/live-preview-react':
+        specifier: 3.49.1
+        version: 3.49.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@payloadcms/next':
         specifier: 3.49.1
         version: 3.49.1(@types/react@19.1.8)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.4(@babel/core@7.28.0)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.49.1(graphql@16.11.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)
@@ -1451,6 +1454,15 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
       payload: 3.49.1
+
+  '@payloadcms/live-preview-react@3.49.1':
+    resolution: {integrity: sha512-iZEOQG4wnG2fbt0aanlTMOChZYpKy95HgIDrIWnF6XaWp6qtDV7FwkfCC3RHKKWAifOI2uZgmDgn+1/UQPSnVw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+
+  '@payloadcms/live-preview@3.49.1':
+    resolution: {integrity: sha512-SqUuULliCI7sdi4IkDoRRbi0jz42fCCRARFU7rnRyRpuCrBQcL6YcwT7Bgk4RhghBMkheqTEvWzdkIuoWBq+Ew==}
 
   '@payloadcms/next@3.49.1':
     resolution: {integrity: sha512-UoMm9QKrs4nyWn9alDFHeqwG38syVh8RKZZcHPvXABBr9cD7Tw+tPLyZwXh5BBnFzrWDuwRJxfJLG6Bcsn6cbw==}
@@ -6232,6 +6244,14 @@ snapshots:
       tsx: 4.19.2
     transitivePeerDependencies:
       - typescript
+
+  '@payloadcms/live-preview-react@3.49.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@payloadcms/live-preview': 3.49.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@payloadcms/live-preview@3.49.1': {}
 
   '@payloadcms/next@3.49.1(@types/react@19.1.8)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.4(@babel/core@7.28.0)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.49.1(graphql@16.11.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)':
     dependencies:

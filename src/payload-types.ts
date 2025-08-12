@@ -93,10 +93,12 @@ export interface Config {
   globals: {
     nav: Nav;
     header: Header;
+    homepage: Homepage;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -174,62 +176,53 @@ export interface Post {
          * Upload an image to accompany the content
          */
         image?: (number | null) | Media;
-        contentTitle?: {
-          /**
-           * Title of the content block
-           */
-          title?: string | null;
-        };
-        contentTags?: {
-          tags?:
-            | {
-                tag?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        contentBody?: {
-          /**
-           * Enter the main content for the block
-           */
-          content?: {
-            root: {
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-        };
-        contentLink?: {
-          linkType?: ('internal' | 'external') | null;
-          /**
-           * Select a blog post to link to
-           */
-          blogPost?: (number | null) | Post;
-          /**
-           * Enter the external URL (https://example.com)
-           */
-          externalUrl?: string | null;
-          linkLabel?: string | null;
-        };
-        contentIcon?: {
-          /**
-           * Upload an icon image for the content block
-           */
-          icon?: (number | null) | Media;
-        };
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'content-w-media';
+        blockType: 'mediaCard';
       }[]
     | null;
   featuredPublication?:
@@ -238,62 +231,53 @@ export interface Post {
          * Upload an image to accompany the content
          */
         image?: (number | null) | Media;
-        contentTitle?: {
-          /**
-           * Title of the content block
-           */
-          title?: string | null;
-        };
-        contentTags?: {
-          tags?:
-            | {
-                tag?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        contentBody?: {
-          /**
-           * Enter the main content for the block
-           */
-          content?: {
-            root: {
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-        };
-        contentLink?: {
-          linkType?: ('internal' | 'external') | null;
-          /**
-           * Select a blog post to link to
-           */
-          blogPost?: (number | null) | Post;
-          /**
-           * Enter the external URL (https://example.com)
-           */
-          externalUrl?: string | null;
-          linkLabel?: string | null;
-        };
-        contentIcon?: {
-          /**
-           * Upload an icon image for the content block
-           */
-          icon?: (number | null) | Media;
-        };
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'content-w-media';
+        blockType: 'mediaCard';
       }[]
     | null;
   listOfPublications?:
@@ -302,62 +286,53 @@ export interface Post {
          * Upload an image to accompany the content
          */
         image?: (number | null) | Media;
-        contentTitle?: {
-          /**
-           * Title of the content block
-           */
-          title?: string | null;
-        };
-        contentTags?: {
-          tags?:
-            | {
-                tag?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        contentBody?: {
-          /**
-           * Enter the main content for the block
-           */
-          content?: {
-            root: {
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-        };
-        contentLink?: {
-          linkType?: ('internal' | 'external') | null;
-          /**
-           * Select a blog post to link to
-           */
-          blogPost?: (number | null) | Post;
-          /**
-           * Enter the external URL (https://example.com)
-           */
-          externalUrl?: string | null;
-          linkLabel?: string | null;
-        };
-        contentIcon?: {
-          /**
-           * Upload an icon image for the content block
-           */
-          icon?: (number | null) | Media;
-        };
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'content-w-media';
+        blockType: 'mediaCard';
       }[]
     | null;
   content?: {
@@ -551,43 +526,24 @@ export interface PostsSelect<T extends boolean = true> {
   storiesOfResilience?:
     | T
     | {
-        'content-w-media'?:
+        mediaCard?:
           | T
           | {
               image?: T;
-              contentTitle?:
+              title?: T;
+              tags?:
                 | T
                 | {
-                    title?: T;
+                    tag?: T;
+                    id?: T;
                   };
-              contentTags?:
-                | T
-                | {
-                    tags?:
-                      | T
-                      | {
-                          tag?: T;
-                          id?: T;
-                        };
-                  };
-              contentBody?:
-                | T
-                | {
-                    content?: T;
-                  };
-              contentLink?:
-                | T
-                | {
-                    linkType?: T;
-                    blogPost?: T;
-                    externalUrl?: T;
-                    linkLabel?: T;
-                  };
-              contentIcon?:
-                | T
-                | {
-                    icon?: T;
-                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -596,43 +552,24 @@ export interface PostsSelect<T extends boolean = true> {
   featuredPublication?:
     | T
     | {
-        'content-w-media'?:
+        mediaCard?:
           | T
           | {
               image?: T;
-              contentTitle?:
+              title?: T;
+              tags?:
                 | T
                 | {
-                    title?: T;
+                    tag?: T;
+                    id?: T;
                   };
-              contentTags?:
-                | T
-                | {
-                    tags?:
-                      | T
-                      | {
-                          tag?: T;
-                          id?: T;
-                        };
-                  };
-              contentBody?:
-                | T
-                | {
-                    content?: T;
-                  };
-              contentLink?:
-                | T
-                | {
-                    linkType?: T;
-                    blogPost?: T;
-                    externalUrl?: T;
-                    linkLabel?: T;
-                  };
-              contentIcon?:
-                | T
-                | {
-                    icon?: T;
-                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -641,43 +578,24 @@ export interface PostsSelect<T extends boolean = true> {
   listOfPublications?:
     | T
     | {
-        'content-w-media'?:
+        mediaCard?:
           | T
           | {
               image?: T;
-              contentTitle?:
+              title?: T;
+              tags?:
                 | T
                 | {
-                    title?: T;
+                    tag?: T;
+                    id?: T;
                   };
-              contentTags?:
-                | T
-                | {
-                    tags?:
-                      | T
-                      | {
-                          tag?: T;
-                          id?: T;
-                        };
-                  };
-              contentBody?:
-                | T
-                | {
-                    content?: T;
-                  };
-              contentLink?:
-                | T
-                | {
-                    linkType?: T;
-                    blogPost?: T;
-                    externalUrl?: T;
-                    linkLabel?: T;
-                  };
-              contentIcon?:
-                | T
-                | {
-                    icon?: T;
-                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -786,6 +704,183 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  heroTitle: string;
+  heroSubtitle?: string | null;
+  storiesOfResilience?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCard';
+      }[]
+    | null;
+  featuredPublication?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCard';
+      }[]
+    | null;
+  listOfPublications?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCard';
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
@@ -816,6 +911,96 @@ export interface HeaderSelect<T extends boolean = true> {
   logo?: T;
   searchEnabled?: T;
   languages?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroSubtitle?: T;
+  storiesOfResilience?:
+    | T
+    | {
+        mediaCard?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              tags?:
+                | T
+                | {
+                    tag?: T;
+                    id?: T;
+                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  featuredPublication?:
+    | T
+    | {
+        mediaCard?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              tags?:
+                | T
+                | {
+                    tag?: T;
+                    id?: T;
+                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  listOfPublications?:
+    | T
+    | {
+        mediaCard?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              tags?:
+                | T
+                | {
+                    tag?: T;
+                    id?: T;
+                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
