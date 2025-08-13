@@ -7,6 +7,7 @@ import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 
 import config from '@/payload.config'
 import Navigation from './_components/Navigation'
+import ResilienceStory from './_components/ResilienceStory'
 import './styles.css'
 
 export default async function HomePage() {
@@ -42,7 +43,27 @@ export default async function HomePage() {
   }
 
   const menuStructure = extractMenuStructure(navMenu)
-  // console.log(JSON.stringify(menuStructure, null, 2))
+
+  // Function to extract stories of resilience
+  function extractStoriesOfResilience(homepageData: any) {
+    if (!homepageData?.storiesOfResilience) return []
+
+    return homepageData.storiesOfResilience.map((story: any) => ({
+      image: {
+        url: story.image?.url || null,
+        alt: story.image?.alt || null,
+      },
+      title: story.title || null,
+      content_html: story.content_html || null,
+      linkType: story.linkType || null,
+      linkLabel: story.linkLabel || null,
+      link: story.linkType === 'internal' ? story.blogPost?.slug : story.externalUrl,
+      tags: story.tags?.map((tag: any) => tag.tag) || [],
+    }))
+  }
+
+  const storiesData = extractStoriesOfResilience(homepage)
+  console.log(JSON.stringify(storiesData, null, 2))
 
   if (!homepage) {
     return (
@@ -59,6 +80,7 @@ export default async function HomePage() {
           <Navigation menuItems={menuStructure} />
           {homepage.heroTitle && <h1>{homepage.heroTitle}</h1>}
           {homepage.heroSubtitle && <p>{homepage.heroSubtitle}</p>}
+          <ResilienceStory stories={storiesData} />
         </div>
       </>
     )
