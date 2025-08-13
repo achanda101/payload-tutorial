@@ -59,6 +59,7 @@ export default async function HomePage() {
       linkLabel: story.linkLabel || null,
       link: story.linkType === 'internal' ? story.blogPost?.slug : story.externalUrl,
       tags: story.tags?.map((tag: any) => tag.tag) || [],
+      contentPosition: story.contentPosition || 'left',
     }))
   }
 

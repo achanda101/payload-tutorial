@@ -15,6 +15,7 @@ interface StoryData {
   linkLabel: string | null
   link: string | null
   tags: string[]
+  contentPosition: 'left' | 'right' | 'center'
 }
 
 interface ResilienceStoryProps {
@@ -28,8 +29,8 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
     <section className="resilience-stories">
       <h2>Stories of Resilience</h2>
       {stories.map((story, index) => (
-        <article key={index} className="story-card">
-          {/* Left column - Image */}
+        <article key={index} className={`story-card content-${story.contentPosition}`}>
+          {/* Image column */}
           <div className="story-image">
             {story.image?.url && (
               <Image
@@ -42,7 +43,7 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
             )}
           </div>
 
-          {/* Right column - Content */}
+          {/* Content column */}
           <div className="story-content">
             {story.title && (
               <h3 className="story-title">{story.title}</h3>
@@ -108,6 +109,35 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           border-radius: 8px;
           background: white;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-card.content-right .story-image {
+          order: 1;
+        }
+
+        .story-card.content-right .story-content {
+          order: 2;
+        }
+
+        .story-card.content-left .story-image {
+          order: 2;
+        }
+
+        .story-card.content-left .story-content {
+          order: 1;
+        }
+
+        .story-card.content-center {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+        }
+
+        .story-card.content-center .story-image {
+          order: 1;
+        }
+
+        .story-card.content-center .story-content {
+          order: 2;
         }
 
         .story-image {
