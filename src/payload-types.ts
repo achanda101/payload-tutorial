@@ -258,9 +258,17 @@ export interface Post {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -313,9 +321,17 @@ export interface Post {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -368,9 +384,17 @@ export interface Post {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -567,6 +591,8 @@ export interface PostsSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -593,6 +619,8 @@ export interface PostsSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -619,6 +647,8 @@ export interface PostsSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -779,9 +809,17 @@ export interface Homepage {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -834,9 +872,17 @@ export interface Homepage {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -889,9 +935,17 @@ export interface Homepage {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -944,9 +998,17 @@ export interface Homepage {
         externalUrl?: string | null;
         linkLabel?: string | null;
         /**
-         * Upload an icon image for the content block
+         * Upload the icon of your social media handle
          */
         icon?: (number | null) | Media;
+        /**
+         * Enter a social media handle (e.g., @example)
+         */
+        smHandle?: string | null;
+        /**
+         * Enter the external URL (https://www.instagram.com/example)
+         */
+        smLink?: string | null;
         contentPosition?: ('left' | 'right' | 'center') | null;
         id?: string | null;
         blockName?: string | null;
@@ -1021,6 +1083,8 @@ export interface HomepageSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -1047,6 +1111,8 @@ export interface HomepageSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -1073,6 +1139,8 @@ export interface HomepageSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;
@@ -1099,6 +1167,8 @@ export interface HomepageSelect<T extends boolean = true> {
               externalUrl?: T;
               linkLabel?: T;
               icon?: T;
+              smHandle?: T;
+              smLink?: T;
               contentPosition?: T;
               id?: T;
               blockName?: T;

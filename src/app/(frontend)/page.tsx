@@ -10,6 +10,7 @@ import Navigation from './_components/Navigation'
 import ResilienceStory from './_components/ResilienceStory'
 import FeaturedPublication from './_components/FeaturedPublication'
 import ListOfPublications from './_components/ListOfPublications'
+import InstagramPost from './_components/InstagramPost'
 import './styles.css'
 
 export default async function HomePage() {
@@ -107,6 +108,32 @@ export default async function HomePage() {
   }
   const listOfPublicationsData = extractListOfPublications(homepage)
 
+  // Function to extract Instagram posts
+  function extractInstagramPost(homepageData: any) {
+    if (!homepageData?.instagramPost) return []
+
+    return homepageData.instagramPost.map((post: any) => ({
+      image: {
+        url: post.image?.url || null,
+        alt: post.image?.alt || null,
+      },
+      title: post.title || null,
+      content_html: post.content_html || null,
+      linkType: post.linkType || null,
+      linkLabel: post.linkLabel || null,
+      link: post.linkType === 'internal' ? post.blogPost?.slug : post.externalUrl,
+      tags: post.tags?.map((tag: any) => tag.tag) || [],
+      contentPosition: post.contentPosition || 'left',
+      icon: {
+        url: post.icon?.url || null,
+        alt: post.icon?.alt || null,
+      },
+      smHandle: post.smHandle || null,
+      smLink: post.smLink || null,
+    }))
+  }
+  const instagramPostData = extractInstagramPost(homepage)
+
   if (!homepage) {
     return (
       <div className="home">
@@ -125,6 +152,7 @@ export default async function HomePage() {
           <ResilienceStory stories={storiesData} />
           <FeaturedPublication publications={featuredPublicationData} />
           <ListOfPublications publications={listOfPublicationsData} />
+          <InstagramPost posts={instagramPostData} />
         </div>
       </>
     )

@@ -125,7 +125,33 @@ export const MediaCard: Block = {
               type: 'upload',
               relationTo: 'media',
               admin: {
-                description: 'Upload an icon image for the content block',
+                description: 'Upload the icon of your social media handle',
+              },
+            },
+            {
+              name: 'smHandle',
+              label: 'Social Media Handle',
+              type: 'text',
+              admin: {
+                description: 'Enter a social media handle (e.g., @example)',
+              },
+            },
+            {
+              name: 'smLink',
+              label: 'Social Media Link',
+              type: 'text',
+              admin: {
+                description: 'Enter the external URL (https://www.instagram.com/example)',
+              },
+              validate: (val: string, { siblingData }: any) => {
+                if (siblingData?.linkType === 'external') {
+                  if (!val) return 'External URL is required'
+                  const isValidUrl = /^https?:\/\/.+/.test(val)
+                  if (!isValidUrl) {
+                    return 'Please enter a valid URL starting with http:// or https://'
+                  }
+                }
+                return true
               },
             },
           ],
