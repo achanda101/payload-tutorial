@@ -21,6 +21,9 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    avatar: {
+      Component: '@/components/admin/ui/avatar',
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -29,6 +32,23 @@ export default buildConfig({
       url: process.env.DOMAIN_URL || 'http://localhost:3000',
       collections: ['posts'],
       globals: ['homepage'],
+      breakpoints: [
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 1080,
+        },
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+      ],
+    },
+    components: {
+      beforeLogin: '@/components/admin/ui/beforeLogin',
     },
   },
   cors: ['http://localhost:3000', process.env.NEXT_PUBLIC_DOMAIN_URL || ''],

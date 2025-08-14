@@ -36,6 +36,15 @@ export const Media: CollectionConfig = {
           format: 'webp',
         },
       },
+      {
+        name: 'avatar',
+        width: 25,
+        height: 25,
+        fit: 'cover',
+        formatOptions: {
+          format: 'webp',
+        },
+      },
     ],
     mimeTypes: ['image/*', 'application/pdf'],
   },

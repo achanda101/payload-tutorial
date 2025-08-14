@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface StoryData {
+interface PublicationData {
   image: {
     url: string | null
     alt: string | null
@@ -18,24 +18,24 @@ interface StoryData {
   contentPosition: 'left' | 'right' | 'center'
 }
 
-interface ResilienceStoryProps {
-  stories: StoryData[]
+interface FeaturedPublicationProps {
+  publications: PublicationData[]
 }
 
-export default function ResilienceStory({ stories }: ResilienceStoryProps) {
-  if (!stories || stories.length === 0) return null
+export default function FeaturedPublication({ publications }: FeaturedPublicationProps) {
+  if (!publications || publications.length === 0) return null
 
   return (
-    <section className="resilience-stories">
-      <h2>Stories of Resilience</h2>
-      {stories.map((story, index) => (
-        <article key={index} className={`story-card content-${story.contentPosition}`}>
+    <section className="featured-publications">
+      <h2>Featured Publications</h2>
+      {publications.map((publication, index) => (
+        <article key={index} className={`publication-card content-${publication.contentPosition}`}>
           {/* Image column */}
-          <div className="story-image">
-            {story.image?.url && (
+          <div className="publication-image">
+            {publication.image?.url && (
               <Image
-                src={story.image.url}
-                alt={story.image.alt || story.title || 'Story image'}
+                src={publication.image.url}
+                alt={publication.image.alt || publication.title || 'Publication image'}
                 width={400}
                 height={300}
                 className="image"
@@ -44,14 +44,14 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           </div>
 
           {/* Content column */}
-          <div className="story-content">
-            {story.title && (
-              <h3 className="story-title">{story.title}</h3>
+          <div className="publication-content">
+            {publication.title && (
+              <h3 className="publication-title">{publication.title}</h3>
             )}
 
-            {story.tags && story.tags.length > 0 && (
-              <div className="story-tags">
-                {story.tags.map((tag, tagIndex) => (
+            {publication.tags && publication.tags.length > 0 && (
+              <div className="publication-tags">
+                {publication.tags.map((tag, tagIndex) => (
                   <span key={tagIndex} className="tag">
                     {tag}
                   </span>
@@ -59,27 +59,27 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
               </div>
             )}
 
-            {story.content_html && (
+            {publication.content_html && (
               <div 
-                className="story-text"
-                dangerouslySetInnerHTML={{ __html: story.content_html }}
+                className="publication-text"
+                dangerouslySetInnerHTML={{ __html: publication.content_html }}
               />
             )}
 
-            {story.linkLabel && story.link && (
-              <div className="story-link">
-                {story.linkType === 'external' ? (
+            {publication.linkLabel && publication.link && (
+              <div className="publication-link">
+                {publication.linkType === 'external' ? (
                   <a
-                    href={story.link}
+                    href={publication.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="link-button"
                   >
-                    {story.linkLabel}
+                    {publication.linkLabel}
                   </a>
                 ) : (
-                  <Link href={`/${story.link}`} className="link-button">
-                    {story.linkLabel}
+                  <Link href={`/${publication.link}`} className="link-button">
+                    {publication.linkLabel}
                   </Link>
                 )}
               </div>
@@ -89,17 +89,17 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
       ))}
 
       <style jsx>{`
-        .resilience-stories {
+        .featured-publications {
           margin: 2rem 0;
         }
 
-        .resilience-stories h2 {
+        .featured-publications h2 {
           margin-bottom: 1.5rem;
           font-size: 2rem;
           color: #333;
         }
 
-        .story-card {
+        .publication-card {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 2rem;
@@ -111,36 +111,36 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .story-card.content-right .story-image {
+        .publication-card.content-right .publication-image {
           order: 1;
         }
 
-        .story-card.content-right .story-content {
+        .publication-card.content-right .publication-content {
           order: 2;
         }
 
-        .story-card.content-left .story-image {
+        .publication-card.content-left .publication-image {
           order: 2;
         }
 
-        .story-card.content-left .story-content {
+        .publication-card.content-left .publication-content {
           order: 1;
         }
 
-        .story-card.content-center {
+        .publication-card.content-center {
           grid-template-columns: 1fr;
           grid-template-rows: auto auto;
         }
 
-        .story-card.content-center .story-image {
+        .publication-card.content-center .publication-image {
           order: 1;
         }
 
-        .story-card.content-center .story-content {
+        .publication-card.content-center .publication-content {
           order: 2;
         }
 
-        .story-image {
+        .publication-image {
           display: flex;
           align-items: flex-start;
         }
@@ -152,13 +152,13 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           object-fit: cover;
         }
 
-        .story-content {
+        .publication-content {
           display: flex;
           flex-direction: column;
           gap: 1rem;
         }
 
-        .story-title {
+        .publication-title {
           margin: 0;
           font-size: 1.5rem;
           font-weight: 600;
@@ -166,7 +166,7 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           line-height: 1.3;
         }
 
-        .story-tags {
+        .publication-tags {
           display: flex;
           flex-wrap: wrap;
           gap: 0.5rem;
@@ -181,21 +181,21 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
           font-weight: 500;
         }
 
-        .story-text {
+        .publication-text {
           flex-grow: 1;
           line-height: 1.6;
           color: #555;
         }
 
-        .story-text :global(p) {
+        .publication-text :global(p) {
           margin-bottom: 1rem;
         }
 
-        .story-text :global(p:last-child) {
+        .publication-text :global(p:last-child) {
           margin-bottom: 0;
         }
 
-        .story-link {
+        .publication-link {
           margin-top: auto;
         }
 
@@ -216,24 +216,24 @@ export default function ResilienceStory({ stories }: ResilienceStoryProps) {
 
         /* Mobile responsive */
         @media (max-width: 768px) {
-          .story-card {
+          .publication-card {
             grid-template-columns: 1fr;
             gap: 1.5rem;
           }
 
-          .story-image {
+          .publication-image {
             order: 1;
           }
 
-          .story-content {
+          .publication-content {
             order: 2;
           }
 
-          .resilience-stories h2 {
+          .featured-publications h2 {
             font-size: 1.75rem;
           }
 
-          .story-title {
+          .publication-title {
             font-size: 1.25rem;
           }
         }

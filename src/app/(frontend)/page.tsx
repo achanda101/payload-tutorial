@@ -8,6 +8,7 @@ import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import config from '@/payload.config'
 import Navigation from './_components/Navigation'
 import ResilienceStory from './_components/ResilienceStory'
+import FeaturedPublication from './_components/FeaturedPublication'
 import './styles.css'
 
 export default async function HomePage() {
@@ -64,6 +65,27 @@ export default async function HomePage() {
   }
 
   const storiesData = extractStoriesOfResilience(homepage)
+
+  // Function to extract featured publication
+  function extractFeaturedPublication(homepageData: any) {
+    if (!homepageData?.featuredPublication) return []
+
+    return homepageData.featuredPublication.map((publication: any) => ({
+      image: {
+        url: publication.image?.url || null,
+        alt: publication.image?.alt || null,
+      },
+      title: publication.title || null,
+      content_html: publication.content_html || null,
+      linkType: publication.linkType || null,
+      linkLabel: publication.linkLabel || null,
+      link: publication.linkType === 'internal' ? publication.blogPost?.slug : publication.externalUrl,
+      tags: publication.tags?.map((tag: any) => tag.tag) || [],
+      contentPosition: publication.contentPosition || 'left',
+    }))
+  }
+
+  const featuredPublicationData = extractFeaturedPublication(homepage)
   console.log(JSON.stringify(storiesData, null, 2))
 
   if (!homepage) {
@@ -82,6 +104,7 @@ export default async function HomePage() {
           {homepage.heroTitle && <h1>{homepage.heroTitle}</h1>}
           {homepage.heroSubtitle && <p>{homepage.heroSubtitle}</p>}
           <ResilienceStory stories={storiesData} />
+          <FeaturedPublication publications={featuredPublicationData} />
         </div>
       </>
     )
