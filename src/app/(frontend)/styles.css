@@ -3,3 +3,140 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* List of Publications Styles */
+.list-of-publications {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.publications-row {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.publications-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  flex-wrap: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: calc(100% + 120px); /* Extend container to show partial third card */
+  margin-right: -120px; /* Compensate for extra width */
+}
+
+.publications-slider::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.publication-card {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.publications-slider .publication-card {
+  flex: 0 0 calc(40% - 12px); /* Smaller cards to ensure third is visible */
+  min-width: calc(40% - 12px);
+  max-width: calc(40% - 12px);
+}
+
+.publication-card:hover {
+  transform: translateY(-2px);
+}
+
+.publication-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.publication-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.publication-content {
+  padding: 20px;
+}
+
+.publication-meta {
+  margin-bottom: 12px;
+}
+
+.publication-tag {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.publication-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.publication-description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.publication-description p {
+  margin: 0;
+}
+
+.publication-link {
+  display: inline-block;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.publication-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .publications-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .publications-slider {
+    flex-direction: row;
+    width: calc(100% + 80px);
+    margin-right: -80px;
+  }
+  
+  .publications-slider .publication-card {
+    flex: 0 0 70%; /* Show most of one card with clear partial next */
+    min-width: 70%;
+    max-width: 70%;
+  }
+  
+  .publication-card {
+    min-width: unset;
+  }
+}

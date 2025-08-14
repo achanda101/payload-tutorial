@@ -9,6 +9,7 @@ import config from '@/payload.config'
 import Navigation from './_components/Navigation'
 import ResilienceStory from './_components/ResilienceStory'
 import FeaturedPublication from './_components/FeaturedPublication'
+import ListOfPublications from './_components/ListOfPublications'
 import './styles.css'
 
 export default async function HomePage() {
@@ -42,7 +43,6 @@ export default async function HomePage() {
         })) || [],
     }))
   }
-
   const menuStructure = extractMenuStructure(navMenu)
 
   // Function to extract stories of resilience
@@ -63,7 +63,6 @@ export default async function HomePage() {
       contentPosition: story.contentPosition || 'left',
     }))
   }
-
   const storiesData = extractStoriesOfResilience(homepage)
 
   // Function to extract featured publication
@@ -79,14 +78,34 @@ export default async function HomePage() {
       content_html: publication.content_html || null,
       linkType: publication.linkType || null,
       linkLabel: publication.linkLabel || null,
-      link: publication.linkType === 'internal' ? publication.blogPost?.slug : publication.externalUrl,
+      link:
+        publication.linkType === 'internal' ? publication.blogPost?.slug : publication.externalUrl,
       tags: publication.tags?.map((tag: any) => tag.tag) || [],
       contentPosition: publication.contentPosition || 'left',
     }))
   }
-
   const featuredPublicationData = extractFeaturedPublication(homepage)
-  console.log(JSON.stringify(storiesData, null, 2))
+
+  // Function to extract list of publications
+  function extractListOfPublications(homepageData: any) {
+    if (!homepageData?.listOfPublications) return []
+
+    return homepageData.listOfPublications.map((publication: any) => ({
+      image: {
+        url: publication.image?.url || null,
+        alt: publication.image?.alt || null,
+      },
+      title: publication.title || null,
+      content_html: publication.content_html || null,
+      linkType: publication.linkType || null,
+      linkLabel: publication.linkLabel || null,
+      link:
+        publication.linkType === 'internal' ? publication.blogPost?.slug : publication.externalUrl,
+      tags: publication.tags?.map((tag: any) => tag.tag) || [],
+      contentPosition: publication.contentPosition || 'left',
+    }))
+  }
+  const listOfPublicationsData = extractListOfPublications(homepage)
 
   if (!homepage) {
     return (
@@ -105,6 +124,7 @@ export default async function HomePage() {
           {homepage.heroSubtitle && <p>{homepage.heroSubtitle}</p>}
           <ResilienceStory stories={storiesData} />
           <FeaturedPublication publications={featuredPublicationData} />
+          <ListOfPublications publications={listOfPublicationsData} />
         </div>
       </>
     )

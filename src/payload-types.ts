@@ -898,6 +898,61 @@ export interface Homepage {
         blockType: 'mediaCard';
       }[]
     | null;
+  instagramPost?:
+    | {
+        /**
+         * Upload an image to accompany the content
+         */
+        image?: (number | null) | Media;
+        /**
+         * Title of the content block
+         */
+        title?: string | null;
+        tags?:
+          | {
+              tag?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enter the main content for the block
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        content_html?: string | null;
+        linkType?: ('internal' | 'external') | null;
+        /**
+         * Select a blog post to link to
+         */
+        blogPost?: (number | null) | Post;
+        /**
+         * Enter the external URL (https://example.com)
+         */
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        /**
+         * Upload an icon image for the content block
+         */
+        icon?: (number | null) | Media;
+        contentPosition?: ('left' | 'right' | 'center') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCard';
+      }[]
+    | null;
   _status?: ('draft' | 'published') | null;
   updatedAt: string;
   createdAt: string;
@@ -998,6 +1053,32 @@ export interface HomepageSelect<T extends boolean = true> {
             };
       };
   listOfPublications?:
+    | T
+    | {
+        mediaCard?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              tags?:
+                | T
+                | {
+                    tag?: T;
+                    id?: T;
+                  };
+              content?: T;
+              content_html?: T;
+              linkType?: T;
+              blogPost?: T;
+              externalUrl?: T;
+              linkLabel?: T;
+              icon?: T;
+              contentPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  instagramPost?:
     | T
     | {
         mediaCard?:

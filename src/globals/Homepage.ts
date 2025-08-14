@@ -74,9 +74,28 @@ export const Homepage: GlobalConfig = {
         initCollapsed: true,
       },
     },
+    {
+      type: 'blocks',
+      name: 'instagramPost',
+      blocks: [MediaCard],
+      labels: {
+        singular: 'An Instagram Post',
+        plural: 'Instagram Posts',
+      },
+      maxRows: 1,
+      admin: {
+        initCollapsed: true,
+        isSortable: false,
+      },
+    },
   ],
   timestamps: true,
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 375,
+        showSaveDraftButton: true,
+      },
+    },
   },
 }

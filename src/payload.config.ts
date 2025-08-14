@@ -29,16 +29,10 @@ export default buildConfig({
     },
     dateFormat: 'dd/MM/yyyy',
     livePreview: {
-      url: process.env.DOMAIN_URL || 'http://localhost:3000',
+      url: process.env.NEXT_PUBLIC_DOMAIN_URL || 'http://localhost:3000',
       collections: ['posts'],
       globals: ['homepage'],
       breakpoints: [
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 1080,
-        },
         {
           label: 'Mobile',
           name: 'mobile',
